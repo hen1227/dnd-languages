@@ -32,6 +32,11 @@ app.listen(80, function(){
 	console.log("Server started on port: 80")
 })
 
+app.get('*', (req, res) => {
+	res.send("Couldn't find your request");
+});
+
+
 process.on('exit', function () {
     console.log('About to exit, waiting for remaining connections to complete');
 });
