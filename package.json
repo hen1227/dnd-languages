@@ -19,6 +19,9 @@
     "type": "git",
     "url": "git+https://github.com/hen1227/dnd-languages.git"
   },
+  "engines": {
+    "node": "16.x"
+  },
   "author": "Henry Abrahamsen",
   "license": "ISC",
   "bugs": {
