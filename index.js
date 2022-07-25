@@ -2,7 +2,6 @@ let express  = require('express');
 const fs = require('fs')
 var cookieParser = require('cookie-parser');
 const bodyParser = require("body-parser");
-const path = require('path')  
 const dndLanguage = require("./dnd-languages")
 
 let app = express();
