@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const dndLanguage = require("./dnd-languages")
 
 let app = express();
-let port = process.env.port || 5000
+let port = process.env.PORT || 5000
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -29,7 +29,7 @@ app.get('/dnd-languages/database/*.tflite', (req, res) => { res.sendFile(''+req.
 app.get('/dnd-languages/database/*.png', (req, res) => { res.sendFile(''+req.url) })
 
 app.listen(port, function(){
-	console.log("Server started on port: 80")
+	console.log("Server started on port: "+port)
 })
 
 app.get('*', (req, res) => {
