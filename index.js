@@ -26,11 +26,11 @@ app.get('/dnd-languages/database/languages.json', function(req, res) {
 		}
 	})
 })
-app.get('/dnd-languages/database/*.zip', function(req, res) {res.sendFile('.'+req.url) })
-app.get('/dnd-languages/database/*.tflite', (req, res) => { res.sendFile('.'+req.url) })
+app.get('/dnd-languages/database/*.zip', function(req, res) {res.sendFile(__dirname+req.url.slice(14)) })
+app.get('/dnd-languages/database/*.tflite', (req, res) => { res.sendFile(__dirname+req.url.slice(14)) })
 app.get('/dnd-languages/database/*.png', (req, res) => { 
-	console.log(req.url);
-	res.sendFile('.'+req.url) })
+	console.log(__dirname + req.url.slice(14));
+	res.sendFile(__dirname+req.url.slice(14)) })
 
 app.listen(port, function(){
 	console.log("Server started on port: "+port)
