@@ -25,5 +25,19 @@
   "scripts": {
     "start": "node server/index.js",
     "build": "cd client && npm install && npm run build"
-  }
+  },
+  "name": "dnd-languages",
+  "version": "1.0.0",
+  "description": "Backend to D&D languages App",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hen1227/dnd-languages.git"
+  },
+  "author": "Henry Abrahamsen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hen1227/dnd-languages/issues"
+  },
+  "homepage": "https://github.com/hen1227/dnd-languages#readme"
 }
