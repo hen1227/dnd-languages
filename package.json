@@ -8,8 +8,7 @@
     "nodemon": "^2.0.15"
   },
   "scripts": {
-    "start": "node server/index.js",
-    "build": "cd client && npm install && npm run build"
+    "start": "node server/index.js"
   },
   "name": "dnd-languages",
   "version": "1.0.0",
