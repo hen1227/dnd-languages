@@ -1,5 +1,6 @@
 let express  = require('express');
-const fs = require('fs')
+var fs = require('fs')
+var path = require('path');
 var cookieParser = require('cookie-parser');
 const bodyParser = require("body-parser");
 const dndLanguage = require("./dnd-languages")
@@ -14,7 +15,7 @@ app.use(express.json());
 app.post('/dnd-languages/upload', bodyParser.urlencoded({ extended: false }), (req, res) => dndLanguage.upload(req, res))
 app.post('/dnd-languages/getCount', bodyParser.urlencoded({ extended: false }), (req, res) => dndLanguage.getCount(req, res))
 app.get('/dnd-languages/database/languages.json', function(req, res) {
-	fs.readFile('/database/languages.json', (err, data) => {
+	fs.readFile('database/languages.json', (err, data) => {
 		if(err){
 		  console.log('Something went wrong');
 		  console.log(err);
@@ -25,9 +26,9 @@ app.get('/dnd-languages/database/languages.json', function(req, res) {
 		}
 	})
 })
-app.get('/dnd-languages/database/*.zip', function(req, res) { res.sendFile(''+req.url.slice(14)) })
-app.get('/dnd-languages/database/*.tflite', (req, res) => { res.sendFile(''+req.url.slice(14)) })
-app.get('/dnd-languages/database/*.png', (req, res) => { res.sendFile(''+req.url.slice(14)) })
+app.get('/dnd-languages/database/*.zip', function(req, res) { res.sendFile('/server/'+req.url) })
+app.get('/dnd-languages/database/*.tflite', (req, res) => { res.sendFile('/server/'+req.url) })
+app.get('/dnd-languages/database/*.png', (req, res) => { res.sendFile('/server/'+req.url) })
 
 app.listen(port, function(){
 	console.log("Server started on port: "+port)
