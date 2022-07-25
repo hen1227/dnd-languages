@@ -1,66 +1,37 @@
-import React from 'react';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import { Parallax, ParallaxLayer } from '@react-spring/parallax';
+let express  = require('express');
+const fs = require('fs')
+var cookieParser = require('cookie-parser');
+const bodyParser = require("body-parser");
+const path = require('path')  
+const dndLanguage = require("./dnd-languages")
 
+let app = express();
 
-function App() {
-  return (
-    <div>
-      <h2>react node js file upload example</h2>
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 
-      <Parallax pages={4} ref={ref}>
-        {/* <ParallaxLayer speed={1}>
-            <h2>Welcome to my website</h2>
-        </ParallaxLayer>
-        <ParallaxLayer offset={1} speed={0.5}>
-            <h2>Web development is fun!</h2>
-        </ParallaxLayer> */}
+app.post('/dnd-languages/upload', bodyParser.urlencoded({ extended: false }), (req, res) => dndLanguage.upload(req, res))
+app.post('/dnd-languages/getCount', bodyParser.urlencoded({ extended: false }), (req, res) => dndLanguage.getCount(req, res))
+app.get('/dnd-languages/database/languages.json', function(req, res) {
+	fs.readFile('/server/dnd-languages/database/languages.json', (err, data) => {
+		if(err){
+		  console.log('Something went wrong');
+		  res.end("failed to load")
+		} else {
+		  const obj = JSON.parse(data);
+		  res.send(obj)
+		}
+	})
+})
+app.get('/dnd-languages/database/*.zip', function(req, res) { res.sendFile('/server/'+req.url) })
+app.get('/dnd-languages/database/*.tflite', (req, res) => { res.sendFile('/server/'+req.url) })
+app.get('/dnd-languages/database/*.png', (req, res) => { res.sendFile('/server/'+req.url) })
 
-        <ParallaxLayer
-          offset={0}
-          speed={1}
-          factor={0.5}
-          style={{
-            background: rgb(255,235,147),
-            backgroundSize: 'cover',
-          }}
-        />
+app.listen(80, function(){
+	console.log("Server started on port: 80")
+})
 
-        <ParallaxLayer
-          offset={0.5}
-          speed={1}
-          factor={4}
-          style={{
-            backgroundImage: `url(${land})`,
-            backgroundSize: 'cover',
-          }}
-        ></ParallaxLayer>
-
-        <ParallaxLayer
-          sticky={{ start: 0.9, end: 2.5 }}
-          style={{ textAlign: 'center' }}
-        >
-          <img src={cat} />
-        </ParallaxLayer>
-
-        <ParallaxLayer
-          offset={0.2}
-          speed={0.05}
-          onClick={() => ref.current.scrollTo(3)}
-        >
-          <h2>Welcome to my website</h2>
-        </ParallaxLayer>
-
-        <ParallaxLayer
-          offset={3}
-          speed={2}
-          onClick={() => ref.current.scrollTo(0)}
-        >
-          <h2>Hi Mom!</h2>
-        </ParallaxLayer>
-      </Parallax>
-    </div>
-  );
-}
- 
-export default App;
+process.on('exit', function () {
+    console.log('About to exit, waiting for remaining connections to complete');
+});
