@@ -4,10 +4,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 const bodyParser = require("body-parser");
 const dndLanguage = require("./dnd-languages")
+const cors = require('cors');
+
 
 let app = express();
 let port = process.env.PORT || 5000
 
+app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
